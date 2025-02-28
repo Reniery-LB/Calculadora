@@ -1,7 +1,9 @@
 package calculadora;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,12 +19,14 @@ public class Ventana extends JFrame {
 		this.setSize(500,500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		
-		this.add(this.calculadora());
+		//this.add(this.calculadora());
+		this.add(this.calc_layout());
 	}
 	
 	public JPanel calculadora() {
+
 		JPanel mipanel = new JPanel();
 		
 		mipanel.setBackground(Color.BLACK);
@@ -259,5 +263,51 @@ public class Ventana extends JFrame {
 		mipanel.add(boton_igual);
 		return mipanel;
 	}
-
+	
+	public JPanel calc_layout() 
+	{
+		Font fuente = new Font("American TYpewrite", Font.BOLD, 40);
+		JPanel mipanel = new JPanel();
+		
+		mipanel.setBackground(Color.decode("#380038")); 
+		mipanel.setOpaque(true);		
+		mipanel.setLayout(new BorderLayout());
+		
+		JLabel results = new JLabel("20.00");
+		results.setBackground(Color.WHITE);
+		results.setOpaque(true);
+		results.setFont(fuente);
+		results.setHorizontalAlignment(JLabel.RIGHT);
+		mipanel.add(results,BorderLayout.NORTH);
+		
+		JPanel centro = new JPanel();
+		centro.setBackground(Color.BLUE);
+		centro.setOpaque(true);
+		centro.setLayout(new BorderLayout());
+		mipanel.add(centro,BorderLayout.CENTER);
+		
+		JPanel botones = new JPanel();
+		botones.setLayout(new GridLayout(4,3));
+		centro.add(botones,BorderLayout.CENTER);
+		
+		String[] textos = {"9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "."};
+		
+		for(String texto_boton : textos) {
+			JButton boton = new JButton(texto_boton);
+			botones.add(boton);
+		}
+		
+		JPanel orilla = new JPanel();
+		orilla.setLayout(new GridLayout(6,1));
+		centro.add(orilla,BorderLayout.LINE_END);
+		
+		String[] textos2 = {"+", "-", "*", "/", "=", "CE"};
+		
+		for(String texto_boton : textos2) {
+			JButton boton = new JButton(texto_boton);
+			orilla.add(boton);
+		}
+		
+		return mipanel;
+	}
 }
