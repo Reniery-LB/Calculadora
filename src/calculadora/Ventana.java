@@ -2,6 +2,7 @@ package calculadora;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -10,19 +11,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Ventana extends JFrame {
 
 	public Ventana() {
-		this.setTitle("CALCULADORA");
+		this.setTitle("Calculando el Interés");
 		this.setVisible(true);
-		this.setSize(500,500);
+		this.setSize(500,600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		
 		//this.add(this.calculadora());
-		this.add(this.calc_layout());
+		//this.add(this.calc_layout());
+		this.add(this.calc_interes());
+		//this.add(this.interfaz());
 	}
 	
 	public JPanel calculadora() {
@@ -273,7 +277,7 @@ public class Ventana extends JFrame {
 		mipanel.setOpaque(true);		
 		mipanel.setLayout(new BorderLayout());
 		
-		JLabel results = new JLabel("20.00");
+		JLabel results = new JLabel("20.00"); 
 		results.setBackground(Color.WHITE);
 		results.setOpaque(true);
 		results.setFont(fuente);
@@ -309,5 +313,117 @@ public class Ventana extends JFrame {
 		}
 		
 		return mipanel;
+	}
+	
+	public JPanel interfaz() {
+		Font fuente = new Font("American TYpewrite", Font.ITALIC, 40);
+		//JPANEL PRINCIPAL
+		JPanel mipanel = new JPanel();
+		
+		mipanel.setBackground(Color.WHITE);
+		mipanel.setOpaque(true);
+		mipanel.setLayout(new BorderLayout());
+		
+		JLabel titulo = new JLabel(" Interés");
+		
+		titulo.setBackground(Color.WHITE);
+		titulo.setFont(fuente);
+		mipanel.add(titulo,BorderLayout.NORTH);
+		
+		//JPANEL CALCULAR INTERES
+		JPanel calcular = new JPanel();
+		
+		calcular.setOpaque(true);
+		calcular.setBackground(Color.GREEN);
+		mipanel.add(calcular, BorderLayout.CENTER);
+		
+		//JPANEL CALCULAR RESULTADO
+		
+		JPanel resultado = new JPanel();
+		resultado.setOpaque(true);
+		resultado.setBackground(Color.PINK);
+		resultado.setLayout(new GridLayout(2,2));
+		mipanel.add(resultado, BorderLayout.SOUTH);
+		
+		JLabel interes = new JLabel("Interés: ");
+		interes.setBorder(BorderFactory.createMatteBorder(PROPERTIES, ALLBITS, ABORT, HEIGHT, getForeground()));
+		resultado.add(interes);
+		
+		JTextField interes_text = new JTextField("315.000000002");
+		resultado.add(interes_text);
+		
+		JLabel Monto = new JLabel("Monto: ");
+		resultado.add(Monto);
+		
+		JTextField monto_text = new JTextField("1815.000000002");
+		resultado.add(monto_text); 
+		
+		
+		
+		return mipanel;
+	}
+	
+	public JPanel calc_interes(){
+        Font fuente = new Font("American Typewriter", Font.ITALIC, 40);
+        
+        JPanel mipanel = new JPanel();
+        mipanel.setBackground(Color.WHITE);
+        mipanel.setOpaque(true);
+        mipanel.setLayout(new BorderLayout());
+        
+        JLabel titulo = new JLabel(" Interés");
+        titulo.setFont(fuente);
+        titulo.setForeground(Color.RED); 
+        mipanel.add(titulo, BorderLayout.NORTH);
+
+        JPanel calcular = new JPanel();
+        calcular.setOpaque(true);
+        calcular.setBackground(Color.GREEN);
+        calcular.setLayout(new GridLayout(4, 2, 5, 5)); 
+
+        JLabel capitalLabel = new JLabel("Capital:");
+        JTextField capitalText = new JTextField("1500");
+        JLabel tiempoLabel = new JLabel("Tiempo:");
+        JTextField tiempoText = new JTextField("2");
+        JLabel tasaLabel = new JLabel("Tasa Interés:");
+        JTextField tasaText = new JTextField("0.1");
+
+        calcular.add(capitalLabel);
+        calcular.add(capitalText);
+        calcular.add(tiempoLabel);
+        calcular.add(tiempoText);
+        calcular.add(tasaLabel);
+        calcular.add(tasaText);
+        
+        JPanel botonesPanel = new JPanel();
+        botonesPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // FlowLayout centrado con espacio entre botones
+        
+        JButton calcularButton = new JButton("Calcular");
+        botonesPanel.add(calcularButton);
+        
+        JButton cancelarButton = new JButton("Cancelar");
+        botonesPanel.add(cancelarButton);
+        
+        mipanel.add(calcular, BorderLayout.CENTER);
+        mipanel.add(botonesPanel, BorderLayout.EAST);
+        
+        JPanel resultado = new JPanel();
+        resultado.setOpaque(true);
+        resultado.setBackground(Color.PINK);
+        resultado.setLayout(new GridLayout(2, 2));
+
+        JLabel interesLabel = new JLabel("Interés:");
+        JTextField interesText = new JTextField("315.0000000000002");
+        JLabel montoLabel = new JLabel("Monto:");
+        JTextField montoText = new JTextField("1815.0000000000002");
+
+        resultado.add(interesLabel);
+        resultado.add(interesText);
+        resultado.add(montoLabel);
+        resultado.add(montoText);
+        
+        mipanel.add(resultado, BorderLayout.SOUTH);
+        
+        return mipanel;
 	}
 }
